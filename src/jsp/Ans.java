@@ -34,7 +34,7 @@ public class Ans {
 				tmp.add(i);
 			}
 		}
-		//Collections.shuffle(tmp);
+		Collections.shuffle(tmp);
 		for(int i = 0; i < ans.length; i++){
 			ans[i] = tmp.get(i);
 		}
