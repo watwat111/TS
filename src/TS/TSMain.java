@@ -31,7 +31,7 @@ public class TSMain {
 	Data data;
 	private int year;
 	private ResultAllYear result;
-	private int tabuLength =2500;
+	private int tabuLength =500;
 	private int maxYear = 5000;
 	private String name = "job3.txt";
 	private String SaveName  ="C:\\Users\\watwat\\Desktop\\2015\\ƒ[ƒ~\\2015_07_01\\"+name+"\\"+tabuLength;
