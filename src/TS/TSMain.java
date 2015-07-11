@@ -37,6 +37,7 @@ public class TSMain {
 	private String SaveName  ="C:\\Users\\watwat\\Desktop\\2015\\ƒ[ƒ~\\2015_07_01\\"+name+"\\"+tabuLength;
 	private int foundBestMakeSpanYear=Integer.MAX_VALUE;
 	private UseTime useTime;
+	private int test;
 	public TSMain() {
 		useTime = new UseTime();
 		init();
