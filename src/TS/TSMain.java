@@ -29,30 +29,37 @@ public class TSMain {
 	private int foundBestMakeSpan;
 	Machines machines;
 	Data data;
+	private int cycleNumber = 10;
 	private int year;
 	private ResultAllYear result;
 	private int tabuLength = 250;
-	private int maxYear = 100;
+	private int maxYear = 10;
 	private String name = "job3.txt";
 	private String MasterPath;
 	private String jspPath;
 	private String saveFilePath;
-	private String SaveName = "C:\\Users\\watwat\\Desktop\\2015\\ƒ[ƒ~\\2015_07_01\\" + name + "\\" + tabuLength;
+	private int nowCycleNumber;
+	//private String SaveName = "C:\\Users\\watwat\\Desktop\\2015\\ƒ[ƒ~\\2015_07_01\\" + name + "\\" + tabuLength;
 	private int foundBestMakeSpanYear = Integer.MAX_VALUE;
 	private UseTime useTime;
 
 	public TSMain() {
-		MasterPath = new File(System.getProperty("java.class.path")).getParent();
+		MasterPath = new File(System.getProperty("java.class.path")).getPath();
+		int index = MasterPath.indexOf(";");
+		MasterPath = new File(MasterPath.substring(0,index)).getParent();		
 		System.out.println(MasterPath);
-		useTime = new UseTime();
-		init();
-		useTime.setStartTime(System.nanoTime());
-		ts();
-		useTime.setEndTime(System.nanoTime());
-		result.setTime(useTime.getTime());
+		for(nowCycleNumber = 0;nowCycleNumber  < cycleNumber; nowCycleNumber ++){
+			useTime = new UseTime();
+			init();
+			useTime.setStartTime(System.nanoTime());
+			ts();
+			useTime.setEndTime(System.nanoTime());
+			result.setTime(useTime.getTime());
 
-		result.setBestMakeSpan(foundBestMakeSpan);
-		outResult();
+			result.setBestMakeSpan(foundBestMakeSpan);
+			outResult();
+		}
+		
 		//outTxt();
 		// jobs.testJobSLength();
 		// load.test();
@@ -87,7 +94,7 @@ public class TSMain {
 
 	}
 
-	public void outTxt() {
+	/*public void outTxt() {
 		try {
 			Calendar now = Calendar.getInstance();
 			File file = new File(
@@ -105,7 +112,7 @@ public class TSMain {
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-	}
+	}*/
 
 	private static boolean checkBeforeWritefile(File file) {
 		if (file.exists()) {
@@ -256,7 +263,7 @@ public class TSMain {
 
 			oos = new ObjectOutputStream(
 					new FileOutputStream(saveFilePath + "\\" + "Result" + +now.get(Calendar.DAY_OF_MONTH)
-							+ now.get(Calendar.HOUR_OF_DAY) + now.get(Calendar.MINUTE) + ".ts"));
+							+"_"+ now.get(Calendar.HOUR_OF_DAY) + "_"+now.get(Calendar.MINUTE) + "_"+nowCycleNumber + ".ts"));
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();

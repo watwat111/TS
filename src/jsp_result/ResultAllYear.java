@@ -14,7 +14,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultAllYear implements Serializable{
+import result.IResult;
+
+public class ResultAllYear implements Serializable,IResult{
 
 	/**
 	 * <code>serialVersionUID</code> ‚ÌƒRƒƒ“ƒg
