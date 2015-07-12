@@ -32,7 +32,7 @@ public class ResultAllYear implements Serializable,IResult{
 	public ResultAllYear(int tabuLngth,String name){
 		result = new ArrayList<ResultOneYear>();
 		this.tabuLength = tabuLngth;
-		this.name = name;
+		this.setName(name);
 	}
 
 	public List<ResultOneYear> getResult() {
@@ -81,6 +81,18 @@ public class ResultAllYear implements Serializable,IResult{
 
 	public void setBestMakeSpan(int bestMakeSpan) {
 		this.bestMakeSpan = bestMakeSpan;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getFileName(){
+		return name+"_"+tabuLength;
 	}
 	
 	

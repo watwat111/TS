@@ -6,16 +6,14 @@
  */
 package TS;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.Calendar;
 
+import createFile.CreateFile;
 import jsp.Ans;
 import jsp.Data;
 import jsp.Jobs;
@@ -66,7 +64,9 @@ public class TSMain {
 	}
 
 	public void init() {
-		Calendar now = Calendar.getInstance();
+		
+		saveFilePath = CreateFile.createFileByData(MasterPath, "\\" + name + "\\" + tabuLength);
+		/*Calendar now = Calendar.getInstance();
 		saveFilePath = MasterPath + "\\" + now.get(Calendar.YEAR) + "_" + (now.get(Calendar.MONTH) + 1) + "_"
 				+ now.get(Calendar.DAY_OF_MONTH) + "\\" + name + "\\" + tabuLength;
 
@@ -75,7 +75,7 @@ public class TSMain {
 
 		} else {
 			newdir.mkdirs();
-		}
+		}*/
 
 		foundBestMakeSpan = Integer.MAX_VALUE;
 		data = new Data();
