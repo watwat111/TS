@@ -4,35 +4,32 @@
  * TODO この生成されたファイルのテンプレートを変更するには次へジャンプ:
  * ウィンドウ - 設定 - Java - コード・スタイル - コード・テンプレート
  */
-package jsp_result;
+package jsp_result.ts_result;
 
 
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import result.IResult;
+import jsp_result.JspResult;
 
-public class ResultAllYear implements Serializable,IResult{
+public class ResultAllYear extends JspResult {
 
+	
 	/**
-	 * <code>serialVersionUID</code> のコメント
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<ResultOneYear> result;
 	private int tabuLength;
-	private String name;
 	private int foundYear;
-	private long time;
-	private int bestMakeSpan;
+	
 	
 	public ResultAllYear(int tabuLngth,String name){
+		super(name);
 		result = new ArrayList<ResultOneYear>();
 		this.tabuLength = tabuLngth;
-		this.setName(name);
+		
 	}
 
 	public List<ResultOneYear> getResult() {
@@ -55,9 +52,7 @@ public class ResultAllYear implements Serializable,IResult{
 		this.tabuLength = tabuLength;
 	}
 	
-	private void writeObject(ObjectOutputStream stream) throws IOException {
-		stream.defaultWriteObject();
-	}
+	
 
 	public int getFoundYear() {
 		return foundYear;
@@ -67,30 +62,8 @@ public class ResultAllYear implements Serializable,IResult{
 		this.foundYear = foundYear;
 	}
 
-	public long getTime() {
-		return time;
-	}
 
-	public void setTime(long time) {
-		this.time = time;
-	}
-
-	public int getBestMakeSpan() {
-		return bestMakeSpan;
-	}
-
-	public void setBestMakeSpan(int bestMakeSpan) {
-		this.bestMakeSpan = bestMakeSpan;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+	@Override
 	public String getFileName(){
 		return name+"_"+tabuLength;
 	}

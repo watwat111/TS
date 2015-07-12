@@ -12,7 +12,7 @@ import java.util.Calendar;
 import javax.swing.JButton;
 
 import createFile.CreateFile;
-import jsp_result.ResultAllYear;
+import jsp_result.ts_result.ResultAllYear;
 import panel.MasterPanel;
 
 public class TsAnalysisPanel extends MasterPanel implements ActionListener {

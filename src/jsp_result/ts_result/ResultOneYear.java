@@ -4,7 +4,7 @@
  * TODO この生成されたファイルのテンプレートを変更するには次へジャンプ:
  * ウィンドウ - 設定 - Java - コード・スタイル - コード・テンプレート
  */
-package jsp_result;
+package jsp_result.ts_result;
 
 import java.io.Serializable;
 
