@@ -1,5 +1,7 @@
 package GA.CrossOver;
 
+import java.util.List;
+
 import jsp.Ans;
 
 public abstract class BasicCrossOver implements ICrossOver{
@@ -12,7 +14,7 @@ public abstract class BasicCrossOver implements ICrossOver{
 		tmp = new int[geneticLength];
 	}
 	
-	public abstract Ans[] crossOver(Ans[] anss,double pc);
+	public abstract List<Ans> crossOver(List<Ans> anss,double pc);
 	
 	protected void copyAns(int[] ans){
 		for(int i = 0; i < geneticLength; i++){

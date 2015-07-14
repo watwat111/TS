@@ -15,6 +15,8 @@ public class Ans {
 
 	private int[] ans;
 	private Data data;
+	private int makeSpan;
+	private int fitness;
 
 	public Ans(Data data) {
 		this.data = data;
@@ -38,6 +40,7 @@ public class Ans {
 		for(int i = 0; i < ans.length; i++){
 			ans[i] = tmp.get(i);
 		}
+		setMakeSpan(Integer.MAX_VALUE);
 		//testShowAns();
 	}
 	
@@ -54,6 +57,26 @@ public class Ans {
 		}
 		System.out.println("");
 
+	}
+
+	public int getMakeSpan() {
+		return makeSpan;
+	}
+
+	public void setMakeSpan(int makeSpan) {
+		this.makeSpan = makeSpan;
+	}
+	
+	public void showMakeSpan(){
+		System.out.println(makeSpan);
+	}
+
+	public int getFitness() {
+		return fitness;
+	}
+
+	public void setFitness(int fitness) {
+		this.fitness = fitness;
 	}
 
 }
