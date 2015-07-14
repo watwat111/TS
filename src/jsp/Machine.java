@@ -98,5 +98,12 @@ public class Machine {
 	public void clear() {
 		setJob.clear();
 	}
+	
+	public int[] getJobInMachine(int[] list){
+		for(int i = 0; i < list.length; i++){
+			list[i] = setJob.get(i).getJobNumber();
+		}
+		return list;
+	}
 
 }

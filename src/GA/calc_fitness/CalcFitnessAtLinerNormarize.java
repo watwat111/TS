@@ -24,7 +24,7 @@ public class CalcFitnessAtLinerNormarize extends CalcFitnessBase{
 				beforeMakeSpan = ans.getMakeSpan();
 			}
 			ans.setFitness(fitness);
-			System.out.println(ans.getFitness());
+			//System.out.println(ans.getFitness());
 		}
 		return list;
 	}

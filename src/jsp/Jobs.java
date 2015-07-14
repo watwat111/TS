@@ -29,7 +29,7 @@ public class Jobs {
 		
 	}
 
-	public void setDatafromJobNumber(int jobNumber) {
+	public int setDatafromJobNumber(int jobNumber) {
 		Job selectJob = jobs[jobNumber];
 		selectJob.getJobInfo();
 		jobDatas[data.getMachineNumber()][data.getJobNumber()]
@@ -41,6 +41,7 @@ public class Jobs {
 		else{
 			data.setBeforeEndTime(0);
 		}
+		return data.getMachineNumber();
 		
 	}
 

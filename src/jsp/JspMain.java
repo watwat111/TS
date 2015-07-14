@@ -16,18 +16,20 @@ public class JspMain {
 	protected Ans ans;
 	protected Machines machines;
 	protected Data data;
-	protected String name = "job3.txt";
+	protected String name ;
 	protected String masterPath;
 	protected String jspPath;
 	protected String saveFilePath;
 	protected UseTime useTime;
-	protected int cycleNumber = 10;
+	protected int cycleNumber ;
 	protected int nowCycleNumber;
 	protected int foundBestMakeSpan;
 	protected int foundBestMakeSpanYear = Integer.MAX_VALUE;
 	
 	
-	public JspMain() {
+	public JspMain(String name,int cycleNumber) {
+		this.name = name;
+		this.cycleNumber = cycleNumber;
 		// TODO Auto-generated constructor stub
 		masterPath = new File(System.getProperty("java.class.path")).getPath();
 		int index = masterPath.indexOf(";");
@@ -36,9 +38,9 @@ public class JspMain {
 		init(0);
 	}
 	
-	public JspMain(int tabuLength) {
+	public JspMain(String name,int cycleNumber,int tabuLength) {
 		// TODO Auto-generated constructor stub
-		this();
+		this(name,cycleNumber);
 		
 		init(tabuLength);
 	}
@@ -72,6 +74,24 @@ public class JspMain {
 
 		return machines.getEndJobInAllMachine();
 	}
+	
+	protected int setGnt(Ans ans) {
+		int [] tmp = ans.getAns();
+		machines.clear();
+		jobs.init();
+		machines.reset();
+		for (int i = 0; i < tmp.length; i++) {
+			// System.out.println(tmp[i]);
+			data.setJobNumber(tmp[i]);
+			ans.getMachineAtinsert()[i] = jobs.setDatafromJobNumber(tmp[i]);
+			int endTime = machines.setMachineFromJobNumber();
+			jobs.setEndTime(endTime);
+		}
+		ans.setJobInMachine(machines.getJobInMachine(ans.getJobInMachine()));
+
+		return machines.getEndJobInAllMachine();
+	}
+	
 	
 	public void outResult(IResult result,String extension) {
 		ObjectOutputStream oos = null;

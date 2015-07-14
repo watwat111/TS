@@ -18,8 +18,8 @@ public class TSMain extends JspMain{
 	private ResultAllYear result;
 
 	public TSMain() {
-		name = "job3.txt";
-		cycleNumber = 10;
+		super("job3.txt",10);
+		
 		//System.out.println(MasterPath);
 		
 		for(nowCycleNumber = 0;nowCycleNumber  < cycleNumber; nowCycleNumber ++){

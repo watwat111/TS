@@ -1,5 +1,5 @@
 package GA.Mutation;
 
-public enum IMutation {
+public interface IMutation {
 
 }

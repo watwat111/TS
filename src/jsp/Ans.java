@@ -14,16 +14,33 @@ import java.util.List;
 public class Ans {
 
 	private int[] ans;
+	private int[] machineAtinsert;
 	private Data data;
 	private int makeSpan;
 	private int fitness;
-
+	
+	
+	private int[][] jobInMachine;
+/*	public static final int MACHINE = 0;
+	public static final int JOB = 1;*/
+	
 	public Ans(Data data) {
 		this.data = data;
 		ans = new int[data.getMachineCount() * data.getJobCount()];
+		setMachineAtinsert(new int[ans.length]);
+		setJobInMachine(new int[data.getMachineCount()][data.getJobCount()]);
 		init();
 		//testShowAns();
 	}
+	
+	@Override
+	public Ans clone()  {
+		Ans copy = new Ans(data);
+		copy.setAns(getAns());
+		copy.setMakeSpan(makeSpan);
+		return copy;
+		
+	};
 	
 	public int[] getAns(){
 		return ans.clone();
@@ -77,6 +94,36 @@ public class Ans {
 
 	public void setFitness(int fitness) {
 		this.fitness = fitness;
+	}
+
+	public int[][] getJobInMachine() {
+		return jobInMachine;
+	}
+
+	public void setJobInMachine(int[][] jobInMachine) {
+		this.jobInMachine = jobInMachine;
+	}
+
+	public int[] getMachineAtinsert() {
+		return machineAtinsert;
+	}
+
+	public void setMachineAtinsert(int[] machineAtinsert) {
+		this.machineAtinsert = machineAtinsert;
+	}
+	
+	public int getMachineCount(){
+		return data.getMachineCount();
+	}
+	
+	public void setGeneticByJobInMachine(){
+		 int[] machine  =new int[data.getMachineCount()];
+		 for(int i = 0; i < machineAtinsert.length; i++){
+			 int tmp = machineAtinsert[i];
+			 int tmp2 = machine[tmp]++;
+			 ans[i] = jobInMachine[tmp][tmp2]; 
+		 }
+		 
 	}
 
 }

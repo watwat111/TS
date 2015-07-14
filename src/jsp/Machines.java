@@ -132,5 +132,12 @@ public class Machines {
 		
 		
 	}
+	
+	public int[][] getJobInMachine(int[][] list){
+		for(int  i= 0; i < machines.length; i++){
+			machines[i].getJobInMachine(list[i]);
+		}
+		return list;
+	}
 
 }
