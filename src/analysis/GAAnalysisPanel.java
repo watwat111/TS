@@ -11,28 +11,25 @@ import java.util.Calendar;
 
 import javax.swing.JButton;
 
-import jsp_result.ts_result.ResultAllYear;
+import jsp_result.ga_result.ResultAllGeneration;
 import panel.MasterPanel;
 import createFile.CreateFile;
 
-public class TsAnalysisPanel extends MasterPanel implements ActionListener {
-	/**
-	 *
-	 */
+public class GAAnalysisPanel extends  MasterPanel implements ActionListener{
+
+
 	private static final long serialVersionUID = 1L;
-	private ResultAllYear[] allResults;
+	private ResultAllGeneration[] allResults;
 	private JButton outText;
 	private String saveFilePath;
 	private String masterPath;
-	private String subPath = "\\result\\ts";
+	private String subPath = "\\result";
 	private static final int OUT_TIME = 0;
-	private static final int OUT_MAKESPAN = 1;
-	private static final int OUT_MOVE = 2;
 
-	public TsAnalysisPanel(String masterPath) {
+	public GAAnalysisPanel(String masterPath) {
 		this.masterPath = masterPath;
 		// TODO Auto-generated constructor stub
-		outText = new JButton("�����o��");
+		outText = new JButton("	書き出し");
 
 		add(outText);
 		outText.addActionListener(this);
@@ -40,9 +37,9 @@ public class TsAnalysisPanel extends MasterPanel implements ActionListener {
 	}
 
 	private void setAllResults() {
-		allResults = new ResultAllYear[results.length];
+		allResults = new ResultAllGeneration[results.length];
 		for (int i = 0; i < results.length; i++) {
-			allResults[i] = (ResultAllYear) results[i];
+			allResults[i] = (ResultAllGeneration) results[i];
 		}
 	}
 
@@ -59,8 +56,6 @@ public class TsAnalysisPanel extends MasterPanel implements ActionListener {
 		if (button.getSource() == outText) {
 			saveFilePath = CreateFile.createFileByData(masterPath, subPath);
 			outTxt(OUT_TIME);
-			outTxt(OUT_MOVE);
-			outTxt(OUT_MAKESPAN);
 		}
 
 	}
@@ -71,12 +66,6 @@ public class TsAnalysisPanel extends MasterPanel implements ActionListener {
 			switch (index) {
 			case OUT_TIME:
 				type = "time";
-				break;
-			case OUT_MAKESPAN:
-				type = "makespan";
-				break;
-			case OUT_MOVE:
-				type = "move";
 				break;
 
 			default:
@@ -92,16 +81,6 @@ public class TsAnalysisPanel extends MasterPanel implements ActionListener {
 			case OUT_TIME:
 				for (int i = 0; i < allResults.length; i++) {
 					pw.print(allResults[i].getTime() + ",");
-				}
-				break;
-			case OUT_MAKESPAN:
-				for (int i = 0; i < allResults.length; i++) {
-					pw.print(allResults[i].getBestMakeSpan() + ",");
-				}
-				break;
-			case OUT_MOVE :
-				for (int i = 0; i < allResults.length; i++) {
-					pw.print(allResults[i].getFoundYear() + ",");
 				}
 				break;
 

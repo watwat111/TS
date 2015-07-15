@@ -4,7 +4,6 @@ import java.io.File;
 
 import javax.swing.JFrame;
 
-import panel.MasterPanel;
 import panel.ResultFrame;
 
 
@@ -14,7 +13,7 @@ public class BootTsAnalysis {
 		String MasterPath = new File(System.getProperty("java.class.path")).getPath();
 		int index = MasterPath.indexOf(";");
 		MasterPath = new File(MasterPath.substring(0,index)).getParent();	
-		JFrame test = new ResultFrame(MasterPath,"ts",new TsAnalysisPanel(MasterPath));
+		JFrame test = new ResultFrame(MasterPath+"\\2015_7_15\\TS\\job2.txt\\","ts",new TsAnalysisPanel(MasterPath));
 		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		test.pack();
 		test.setVisible(true);	

@@ -1,30 +1,55 @@
 /*
- * ì¬“ú: 2015/06/02
+ * ï¿½ì¬ï¿½ï¿½: 2015/06/02
  *
- * TODO ‚±‚Ì¶¬‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Ìƒeƒ“ƒvƒŒ[ƒg‚ğ•ÏX‚·‚é‚É‚ÍŸ‚ÖƒWƒƒƒ“ƒv:
- * ƒEƒBƒ“ƒhƒE - İ’è - Java - ƒR[ƒhEƒXƒ^ƒCƒ‹ - ƒR[ƒhEƒeƒ“ƒvƒŒ[ƒg
+ * TODO ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ìƒeï¿½ï¿½ï¿½vï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½É‚Íï¿½ï¿½ÖƒWï¿½ï¿½ï¿½ï¿½ï¿½v:
+ * ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½E - ï¿½İ’ï¿½ - Java - ï¿½Rï¿½[ï¿½hï¿½Eï¿½Xï¿½^ï¿½Cï¿½ï¿½ - ï¿½Rï¿½[ï¿½hï¿½Eï¿½eï¿½ï¿½ï¿½vï¿½ï¿½ï¿½[ï¿½g
  */
 package TS;
 
-import createFile.CreateFile;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
 import jsp.JspMain;
 import jsp_result.ts_result.ResultAllYear;
+import createFile.CreateFile;
 
 public class TSMain extends JspMain{
-	
-	private int year;
-	private int tabuLength = 250;
-	private int maxYear = 10;
-	private ResultAllYear result;
 
-	public TSMain() {
-		super("job3.txt",10);
-		
+	private int year;
+	private   int tabuLength;
+	private int maxYear = 5000;
+	private ResultAllYear result;
+	private boolean isEnd;
+	private Timer timer;
+
+
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int tabuLength = 250;
+		TSMain main = new TSMain(tabuLength);
+
+	}
+
+	public TSMain(int tabu) {
+		super("job3.txt",5,tabu);
+		tabuLength = tabu;
 		//System.out.println(MasterPath);
-		
+
 		for(nowCycleNumber = 0;nowCycleNumber  < cycleNumber; nowCycleNumber ++){
+			try {
+				timer_delay();
+			} catch (InterruptedException e) {
+				// TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸ catch ãƒ–ãƒ­ãƒƒã‚¯
+				e.printStackTrace();
+			}
 			useTime = new UseTime();
+			super.init(tabuLength);
 			init();
+
 			useTime.setStartTime(System.nanoTime());
 			ts();
 			useTime.setEndTime(System.nanoTime());
@@ -33,35 +58,40 @@ public class TSMain extends JspMain{
 			result.setBestMakeSpan(foundBestMakeSpan);
 			outResult(result,nowCycleNumber+".ts");
 		}
-		
+
 		//outTxt();
 		// jobs.testJobSLength();
 		// load.test();
 	}
 
 	public void init() {
-		
+
 		saveFilePath = CreateFile.createFileByData(masterPath, "\\TS\\" + name + "\\" + tabuLength);
-	
 		foundBestMakeSpan = Integer.MAX_VALUE;
 		year = 0;
-		
-
+		isEnd  =false;
 		result = new ResultAllYear(tabuLength, name);
+		result.setFoundYear(Integer.MAX_VALUE);
 
 		// data.testJobLength();
 
 	}
 
-	
+
 
 
 	public void ts() {
+		//foundBestMakeSpan = Integer.MAX_VALUE;
 		for (year = 0; year < maxYear; year++) {
 
 			evaluateBySwap();
 			if (foundBestMakeSpan == data.getMinMakeSpan()) {
 				result.setFoundYear(year);
+				timer.cancel();
+				break;
+			}
+			if(isEnd){
+				timer.cancel();
 				break;
 			}
 		}
@@ -84,7 +114,7 @@ public class TSMain extends JspMain{
 				for (int jobIndexY = jobIndexX + 1; jobIndexY < data.getJobCount(); jobIndexY++) {
 					if (!machines.isTabu(machineIndex, jobIndexX, jobIndexY, year)) {
 						setGnt(tmp);
-						// ‚±‚±
+						// ï¿½ï¿½ï¿½ï¿½
 						machines.changeJobXandYOnMachine(machineIndex, jobIndexX, jobIndexY);
 						tmp2 = machines.getReconstruct(tmp2);
 						machines.changeJobXandYOnMachine(machineIndex, jobIndexX, jobIndexY);
@@ -160,20 +190,39 @@ public class TSMain extends JspMain{
 		System.out.println(bestJobIndexX + ";" + bestJobIndexY + ":" + bestMachineNumber);
 		machines.insertJobOnMachineWithTabu(bestMachineNumber, bestJobIndexX, bestJobIndexY, year);
 		machines.AnsReconstruct(ans);
-		
+
 
 	}
 
-	
+	public void timer_delay() throws InterruptedException {
+		TimerTask task = new SampleTask();
+		timer = new Timer("é…å»¶ã‚¿ã‚¤ãƒãƒ¼");
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		TSMain main = new TSMain();
+		////System.out.println("main startï¼š" + new Date());
+		timer.schedule(task, TimeUnit.SECONDS.toMillis(5)); // 10ç§’å¾Œã«å®Ÿè¡Œ
 
+		/*TimeUnit.SECONDS.sleep(30); // 30ç§’é–“å¾…ã¤
+		timer.cancel();*/
+		//System.out.println("main end  ï¼š" + new Date());
 	}
 
-	
+	class SampleTask extends TimerTask {
+
+
+
+		/** ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ãŒTimerã‹ã‚‰å‘¼ã°ã‚Œã‚‹ */
+		@Override
+		public void run() {
+			System.out.println("5s end");
+			isEnd  = true;
+			//System.out.println("ã‚¿ã‚¹ã‚¯å®Ÿè¡Œï¼š" + new Date());
+		}
+	}
+
+
+
+
+
+
 
 }

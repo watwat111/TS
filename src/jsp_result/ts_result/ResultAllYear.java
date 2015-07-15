@@ -1,19 +1,20 @@
 /*
- * ì¬“ú: 2015/06/30
+ * ï¿½ì¬ï¿½ï¿½: 2015/06/30
  *
- * TODO ‚±‚Ì¶¬‚³‚ê‚½ƒtƒ@ƒCƒ‹‚Ìƒeƒ“ƒvƒŒ[ƒg‚ğ•ÏX‚·‚é‚É‚ÍŸ‚ÖƒWƒƒƒ“ƒv:
- * ƒEƒBƒ“ƒhƒE - İ’è - Java - ƒR[ƒhEƒXƒ^ƒCƒ‹ - ƒR[ƒhEƒeƒ“ƒvƒŒ[ƒg
+ * TODO ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ìƒeï¿½ï¿½ï¿½vï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½É‚Íï¿½ï¿½ÖƒWï¿½ï¿½ï¿½ï¿½ï¿½v:
+ * ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½E - ï¿½İ’ï¿½ - Java - ï¿½Rï¿½[ï¿½hï¿½Eï¿½Xï¿½^ï¿½Cï¿½ï¿½ - ï¿½Rï¿½[ï¿½hï¿½Eï¿½eï¿½ï¿½ï¿½vï¿½ï¿½ï¿½[ï¿½g
  */
 package jsp_result.ts_result;
 
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import jsp_result.JspResult;
 
-public class ResultAllYear extends JspResult {
+public class ResultAllYear extends JspResult implements Serializable{
 
 	
 	/**
