@@ -11,6 +11,7 @@ import java.util.Calendar;
 
 import javax.swing.JButton;
 
+import jsp_example.FileName;
 import jsp_result.ts_result.ResultAllYear;
 import panel.MasterPanel;
 import createFile.CreateFile;
@@ -22,9 +23,11 @@ public class TsAnalysisPanel extends MasterPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private ResultAllYear[] allResults;
 	private JButton outText;
+	private JButton allOutCsv;
 	private String saveFilePath;
 	private String masterPath;
 	private String subPath = "\\result\\ts";
+
 	private static final int OUT_TIME = 0;
 	private static final int OUT_MAKESPAN = 1;
 	private static final int OUT_MOVE = 2;
@@ -33,11 +36,15 @@ public class TsAnalysisPanel extends MasterPanel implements ActionListener {
 		this.masterPath = masterPath;
 		// TODO Auto-generated constructor stub
 		outText = new JButton("�����o��");
-
+		allOutCsv = new JButton("allOutCsv");
+		add(allOutCsv);
 		add(outText);
 		outText.addActionListener(this);
+		allOutCsv.addActionListener(this);
 		outText.setEnabled(false);
 	}
+
+
 
 	private void setAllResults() {
 		allResults = new ResultAllYear[results.length];
@@ -58,14 +65,37 @@ public class TsAnalysisPanel extends MasterPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		if (button.getSource() == outText) {
 			saveFilePath = CreateFile.createFileByData(masterPath, subPath);
-			outTxt(OUT_TIME);
-			outTxt(OUT_MOVE);
-			outTxt(OUT_MAKESPAN);
+			outCsv(OUT_TIME);
+			outCsv(OUT_MOVE);
+			outCsv(OUT_MAKESPAN);
+		}
+		else if(button.getSource() == allOutCsv){
+			saveFilePath = CreateFile.createFileByData(masterPath, subPath);
+			String loadPath =masterPath +"\\"+   CreateFile.createNowDataPath() + "\\" + "TS" + "\\";
+			//System.out.println(CreateFile.createFileByData(masterPath, subPath));
+			for(FileName f: FileName.values()){
+				for(int tabuLength = 0; tabuLength < 21; tabuLength ++){
+
+
+					File file = new File(loadPath +  f.toString()+".txt\\" + (tabuLength * 50) + "\\");
+					if(file.exists()){
+						File[] result = file.listFiles();
+						setFiles(result);
+						setAllResults();
+						outCsv(OUT_TIME);
+						outCsv(OUT_MOVE);
+						outCsv(OUT_MAKESPAN);
+						//System.out.println(loadPath +  f.toString()+".txt\\" + (tabuLength * 50) + "\\");
+					}
+				}
+			}
+		//	System.out.println(loadPath );
+
 		}
 
 	}
 
-	public void outTxt(int index) {
+	public void outCsv(int index) {
 		try {
 			String type = "";
 			switch (index) {
@@ -85,7 +115,7 @@ public class TsAnalysisPanel extends MasterPanel implements ActionListener {
 			Calendar now = Calendar.getInstance();
 			File file = new File(saveFilePath + "\\" + allResults[0].getFileName() + "_" + type + "_"
 					+ now.get(Calendar.DAY_OF_MONTH) + "_" + now.get(Calendar.HOUR_OF_DAY) + "_"
-					+ now.get(Calendar.MINUTE) + "_" + now.get(Calendar.MILLISECOND) + ".txt");
+					+ now.get(Calendar.MINUTE) + "_" + now.get(Calendar.MILLISECOND) + ".csv");
 
 			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
 			switch (index) {

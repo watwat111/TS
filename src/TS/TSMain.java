@@ -11,6 +11,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import jsp.JspMain;
+import jsp_example.FileName;
 import jsp_result.ts_result.ResultAllYear;
 import createFile.CreateFile;
 
@@ -30,11 +31,11 @@ public class TSMain extends JspMain{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String[] fileName = new String[]{"job1.txt","job2.txt","job3.txt","job4.txt","job5.txt"};
 
-		for(int i = 0; i < fileName.length; i++){
+
+		for(FileName f : FileName.values()){
 			for(int tabu = 0; tabu < 5; tabu++){
-				TSMain main = new TSMain(tabu * 50,fileName[i]);
+				TSMain main = new TSMain(tabu * 50,f.toString() + ".txt");
 			}
 
 		}
