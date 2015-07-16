@@ -17,11 +17,12 @@ import createFile.CreateFile;
 public class TSMain extends JspMain{
 
 	private int year;
-	private   int tabuLength;
-	private int maxYear = 5000;
+	private int tabuLength;
+	private int maxYear = 100;
 	private ResultAllYear result;
 	private boolean isEnd;
 	private Timer timer;
+
 
 
 
@@ -29,23 +30,26 @@ public class TSMain extends JspMain{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int tabuLength = 250;
-		TSMain main = new TSMain(tabuLength);
+		String[] fileName = new String[]{"job1.txt","job2.txt","job3.txt","job4.txt","job5.txt"};
+
+		for(int i = 0; i < fileName.length; i++){
+			for(int tabu = 0; tabu < 5; tabu++){
+				TSMain main = new TSMain(tabu * 50,fileName[i]);
+			}
+
+		}
+
+
 
 	}
 
-	public TSMain(int tabu) {
-		super("job3.txt",5,tabu);
+	public TSMain(int tabu,String fileName) {
+		super(fileName,2,tabu);
 		tabuLength = tabu;
 		//System.out.println(MasterPath);
 
 		for(nowCycleNumber = 0;nowCycleNumber  < cycleNumber; nowCycleNumber ++){
-			try {
-				timer_delay();
-			} catch (InterruptedException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+
 			useTime = new UseTime();
 			super.init(tabuLength);
 			init();
@@ -87,11 +91,11 @@ public class TSMain extends JspMain{
 			evaluateBySwap();
 			if (foundBestMakeSpan == data.getMinMakeSpan()) {
 				result.setFoundYear(year);
-				timer.cancel();
+				//timer.cancel();
 				break;
 			}
 			if(isEnd){
-				timer.cancel();
+				//timer.cancel();
 				break;
 			}
 		}
