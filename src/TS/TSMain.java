@@ -10,10 +10,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import createFile.CreateFile;
 import jsp.JspMain;
 import jsp_example.FileName;
 import jsp_result.ts_result.ResultAllYear;
-import createFile.CreateFile;
 
 public class TSMain extends JspMain{
 
@@ -34,7 +34,7 @@ public class TSMain extends JspMain{
 
 
 		for(FileName f : FileName.values()){
-			for(int tabu = 0; tabu < 5; tabu++){
+			for(int tabu = 0; tabu < 20; tabu++){
 				TSMain main = new TSMain(tabu * 50,f.toString() + ".txt");
 			}
 
@@ -45,7 +45,7 @@ public class TSMain extends JspMain{
 	}
 
 	public TSMain(int tabu,String fileName) {
-		super(fileName,2,tabu);
+		super(fileName,100,tabu);
 		tabuLength = tabu;
 		//System.out.println(MasterPath);
 

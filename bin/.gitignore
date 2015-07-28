@@ -1,3 +1,4 @@
-/TS/
-/analysis/
 /jsp_example/
+/.gitignore
+/analysis/
+/TS/
