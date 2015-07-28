@@ -34,7 +34,7 @@ public class TSMain extends JspMain{
 
 
 		for(FileName f : FileName.values()){
-			for(int tabu = 0; tabu < 20; tabu++){
+			for(int tabu = 15; tabu < 20; tabu++){
 				TSMain main = new TSMain(tabu * 50,f.toString() + ".txt");
 			}
 
@@ -45,7 +45,7 @@ public class TSMain extends JspMain{
 	}
 
 	public TSMain(int tabu,String fileName) {
-		super(fileName,100,tabu);
+		super(fileName,75,tabu);
 		tabuLength = tabu;
 		//System.out.println(MasterPath);
 
